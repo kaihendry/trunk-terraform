@@ -1,0 +1,29 @@
+on: [push]
+
+# https://cloud.google.com/blog/products/identity-security/enabling-keyless-authentication-from-github-actions
+jobs:
+    job_id:
+      # Add "id-token" with the intended permissions.
+      runs-on: ubuntu-latest
+      permissions:
+        contents: 'read'
+        id-token: 'write'
+  
+      steps:
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        # https://iam.googleapis.com/projects/944742483537/locations/global/workloadIdentityPools/my-pool/providers/my-provider
+        with:
+          workload_identity_provider: 'projects/944742483537/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+          service_account: gh-559@huware-prep.iam.gserviceaccount.com
+  
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+            version: '>= 416.0.0'
+  
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
+
+      - name: Show project id
+        run: gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
