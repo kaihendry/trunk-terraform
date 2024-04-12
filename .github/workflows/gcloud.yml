@@ -32,6 +32,9 @@ jobs:
       - name: Show currently assumed service account permissions
         run: gcloud projects get-iam-policy huware-prep --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:gh-559@huware-prep.iam.gserviceaccount.com"
 
+      - name: Show enabled APIs
+        run: gcloud services list --enabled 
+
       - name: List installed components
         run: gcloud components list
 
