@@ -25,5 +25,8 @@ jobs:
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
 
+      - name: 'Show big query datasets'
+        run: gcloud alpha bq datasets list
+
       - name: Show project id
         run: gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
