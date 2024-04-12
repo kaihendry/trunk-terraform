@@ -21,12 +21,16 @@ jobs:
         uses: 'google-github-actions/setup-gcloud@v2'
         with:
             version: '>= 416.0.0'
-  
+            install_components: 'alpha'
+
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
 
       - name: 'Show big query datasets'
         run: gcloud alpha bq datasets list
+
+      - name: List installed components
+        run: gcloud components list
 
       - name: Show project id
         run: gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
