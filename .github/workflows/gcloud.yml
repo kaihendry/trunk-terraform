@@ -2,7 +2,7 @@ on: [push]
 
 # https://cloud.google.com/blog/products/identity-security/enabling-keyless-authentication-from-github-actions
 jobs:
-    job_id:
+    gcp:
       # Add "id-token" with the intended permissions.
       runs-on: ubuntu-latest
       permissions:
@@ -28,6 +28,9 @@ jobs:
 
       - name: 'Show big query datasets'
         run: gcloud alpha bq datasets list
+
+      - name: Show currently assumed service account permissions
+        run: gcloud projects get-iam-policy huware-prep --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:gh-559@huware-prep.iam.gserviceaccount.com"
 
       - name: List installed components
         run: gcloud components list
