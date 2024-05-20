@@ -1,13 +1,24 @@
-on: [push]
+name: 'Terraform Plan/Apply'
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+#Special permissions required for OIDC authentication
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
 
 # https://cloud.google.com/blog/products/identity-security/enabling-keyless-authentication-from-github-actions
 jobs:
     gcp:
       # Add "id-token" with the intended permissions.
       runs-on: ubuntu-latest
-      permissions:
-        contents: 'read'
-        id-token: 'write'
   
       steps:
       - id: 'auth'
