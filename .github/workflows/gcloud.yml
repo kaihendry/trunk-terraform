@@ -147,6 +147,19 @@ jobs:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
         uses: actions/checkout@v4
+
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        # https://iam.googleapis.com/projects/944742483537/locations/global/workloadIdentityPools/my-pool/providers/my-provider
+        with:
+          workload_identity_provider: 'projects/944742483537/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+          service_account: gh-559@huware-prep.iam.gserviceaccount.com
+  
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+            version: '>= 416.0.0'
+            install_components: 'alpha'
   
       # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
       - name: Setup Terraform
