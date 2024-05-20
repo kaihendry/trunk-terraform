@@ -17,6 +17,7 @@ permissions:
 # https://cloud.google.com/blog/products/identity-security/enabling-keyless-authentication-from-github-actions
 jobs:
     terraform-plan:
+      name: 'Terraform Plan'
       # Add "id-token" with the intended permissions.
       runs-on: ubuntu-latest
       outputs:
