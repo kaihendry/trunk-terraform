@@ -55,6 +55,10 @@ jobs:
         run: gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
 
       # nicked from https://github.com/Azure-Samples/terraform-github-actions/blob/main/.github/workflows/tf-plan-apply.yml
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
