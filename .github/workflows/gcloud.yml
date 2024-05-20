@@ -23,6 +23,9 @@ jobs:
         tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
   
       steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - id: 'auth'
         uses: 'google-github-actions/auth@v2'
         # https://iam.googleapis.com/projects/944742483537/locations/global/workloadIdentityPools/my-pool/providers/my-provider
@@ -55,10 +58,6 @@ jobs:
         run: gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
 
       # nicked from https://github.com/Azure-Samples/terraform-github-actions/blob/main/.github/workflows/tf-plan-apply.yml
-
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
