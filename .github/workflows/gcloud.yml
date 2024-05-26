@@ -50,12 +50,6 @@ jobs:
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
 
-      - name: 'Show big query datasets'
-        run: gcloud alpha bq datasets list
-
-      - name: Show currently assumed service account permissions
-        run: gcloud projects get-iam-policy huware-prep --flatten="bindings[].members" --format='table(bindings.role)' --filter="bindings.members:gh-559@huware-prep.iam.gserviceaccount.com"
-
       - name: Show enabled APIs
         run: gcloud services list --enabled 
 
