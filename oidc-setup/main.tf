@@ -15,6 +15,26 @@ provider "google" {
   project = var.project_id
 }
 
+resource "google_project_service" "iam" {
+  project = var.project_id
+  service = "iam.googleapis.com"
+}
+
+resource "google_project_service" "cloudresourcemanager" {
+  project = var.project_id
+  service = "cloudresourcemanager.googleapis.com"
+}
+
+resource "google_project_service" "iamcredentials" {
+  project = var.project_id
+  service = "iamcredentials.googleapis.com"
+}
+
+resource "google_project_service" "sts" {
+  project = var.project_id
+  service = "sts.googleapis.com"
+}
+
 resource "google_service_account" "github_action_sa" {
   account_id   = "github-action"
   display_name = "GitHub Action Service Account"
@@ -40,7 +60,7 @@ module "gh_oidc" {
 }
 
 output "workload_identity_provider" {
-  value = "projects/${var.project_id}/locations/global/workloadIdentityPools/${module.gh_oidc.pool_name}/providers/${module.gh_oidc.provider_name}"
+  value = module.gh_oidc.provider_name
 }
 
 output "service_account_email" {
