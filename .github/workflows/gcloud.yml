@@ -12,7 +12,7 @@ on:
 # workload_identity_provider: 'projects/944742483537/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
 # service_account: gh-559@huware-prep.iam.gserviceaccount.com
 env:
-  WORKLOAD: projects/270438815771/locations/global/workloadIdentityPools/gh-actions-pool
+  WORKLOAD: projects/270438815771/locations/global/workloadIdentityPools/gh-actions-pool/providers/gh-actions-provider
   SVCACCOUNT: github-action@stgtest-424513.iam.gserviceaccount.com
 
 #Special permissions required for OIDC authentication
