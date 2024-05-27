@@ -8,15 +8,14 @@ on:
     branches:
       - main
 
-permissions:
-    contents: read
-    id-token: write
-    actions: read
-
 jobs:
     deploy-to-dev:
         name: Deploy to dev
         uses: ./.github/workflows/deploy.yml
+        permissions:
+            id-token: write
+            contents: read
+            pull-requests: write
         with:
             environment: dev
 
@@ -25,5 +24,9 @@ jobs:
         needs:
             - deploy-to-dev
         uses: ./.github/workflows/deploy.yml
+        permissions:
+            id-token: write
+            contents: read
+            pull-requests: write
         with:
             environment: stg
