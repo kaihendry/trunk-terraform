@@ -1,1 +1,1 @@
-prefix = "stg"
+stage = "stg"
