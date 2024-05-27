@@ -9,7 +9,7 @@ on:
         required: true
 
 env:
-  TF_VAR_ENVIRONMENT: ${{ github.event.deployment.environment }}
+  TF_VAR_ENVIRONMENT: ${{ inputs.environment }}
 
 jobs:
     deploy:
