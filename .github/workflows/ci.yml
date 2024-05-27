@@ -16,7 +16,7 @@ permissions:
 jobs:
     deploy-to-dev:
         name: Deploy to dev
-        uses: ./.github/workflows/test.yml
+        uses: ./.github/workflows/deploy.yml
         with:
             environment: dev
 
@@ -24,6 +24,6 @@ jobs:
         name: Deploy to stg
         needs:
             - deploy-to-dev
-        uses: ./.github/workflows/test.yml
+        uses: ./.github/workflows/deploy.yml
         with:
             environment: stg
