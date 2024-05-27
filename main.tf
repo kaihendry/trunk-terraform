@@ -1,12 +1,11 @@
-# Create new storage bucket in the US multi-region
-# with coldline storage
-resource "random_id" "bucket_prefix" {
-  byte_length = 8
+variable "environment" {
+  type    = string
+  default = "unset"
 }
 
-resource "google_storage_bucket" "static" {
-  name     = "${random_id.bucket_prefix.hex}-bq-bucket"
-  location = "EU"
 
+resource "google_storage_bucket" "static" {
+  name                        = "hendry-bq-terraform-${var.environment}"
+  location                    = "EU"
   uniform_bucket_level_access = true
 }
