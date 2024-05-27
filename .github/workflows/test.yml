@@ -1,4 +1,5 @@
 name: Just testing
+
 on:
   workflow_call:
     inputs:
@@ -11,11 +12,11 @@ env:
   TF_VAR_ENVIRONMENT: ${{ github.event.deployment.environment }}
 
 jobs:
-    terraform-plan:
-      name: 'Terraform Plan'
+    deploy:
       runs-on: ubuntu-latest
       environment: ${{ inputs.environment }}
       steps:
-      - run: echo ${{ inputs.environment }}
-      - run: echo ${{ vars.WORKLOAD }}
+        - run: echo ${{ inputs.environment }}
+        - run: echo ${{ vars.WORKLOAD }}
+        - run: echo ${{ env.TF_VAR_ENVIRONMENT }}
    
