@@ -11,12 +11,14 @@ on:
 jobs:
     deploy-to-dev:
         name: Deploy to dev
-        environment: dev
         uses: ./.github/workflows/test.yml
+        with:
+            environment: dev
 
     deploy-to-stg:
         name: Deploy to stg
         needs:
             - deploy-to-dev
-        environment: stg
         uses: ./.github/workflows/test.yml
+        with:
+            environment: dev
