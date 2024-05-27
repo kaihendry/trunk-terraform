@@ -8,6 +8,11 @@ on:
     branches:
       - main
 
+permissions:
+    contents: read
+    id-token: write
+    actions: read
+
 jobs:
     deploy-to-dev:
         name: Deploy to dev
@@ -21,4 +26,4 @@ jobs:
             - deploy-to-dev
         uses: ./.github/workflows/test.yml
         with:
-            environment: dev
+            environment: stg
