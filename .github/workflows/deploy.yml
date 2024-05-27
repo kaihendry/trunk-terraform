@@ -28,6 +28,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - run: |
+          echo ${{ vars.WORKLOAD }}
+          echo ${{ vars.SVCACCOUNT }}
+    
       - id: 'auth'
         uses: 'google-github-actions/auth@v2'
         with:
