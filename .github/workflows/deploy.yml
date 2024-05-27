@@ -162,7 +162,6 @@ jobs:
       - name: Terraform Init
         run: terraform init -backend-config="conf/${{ inputs.environment }}.tfvars"
 
-  
       # Download saved plan from artifacts  
       - name: Download Terraform Plan
         uses: actions/download-artifact@v4
