@@ -11,7 +11,6 @@ terraform {
   }
   backend "gcs" {
     bucket = "hendry-bq-terraform"
-    prefix = var.stage_prefix
   }
 }
 
@@ -19,13 +18,4 @@ provider "google" {
 }
 
 provider "google-beta" {
-}
-
-variable "stage" {
-  type    = string
-  default = "dev"
-}
-
-locals {
-  stage_prefix = var.stage
 }

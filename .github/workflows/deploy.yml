@@ -12,9 +12,6 @@ permissions:
   contents: read
   pull-requests: write
 
-env: #unused atm
-  TF_VAR_ENVIRONMENT: ${{ inputs.environment }}
-
 jobs:
     terraform-plan:
       name: 'Terraform Plan'
@@ -64,7 +61,7 @@ jobs:
   
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform init -backend-config="conf/${{ inputs.environment }}.tfvars"
+        run: terraform init -backend-config="prefix=${{ inputs.environment }}"
   
       # Checks that all Terraform configuration files adhere to a canonical format
       # Will fail the build if not
@@ -77,7 +74,7 @@ jobs:
         id: tf-plan
         run: |
           export exitcode=0
-          terraform plan -detailed-exitcode -no-color -out tfplan-${{ inputs.environment }} || export exitcode=$?
+          terraform plan -var-file="conf/${{ inputs.environment }}.tfvars" -detailed-exitcode -no-color -out tfplan-${{ inputs.environment }} || export exitcode=$?
   
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
           
@@ -167,7 +164,7 @@ jobs:
   
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform init -backend-config="conf/${{ inputs.environment }}.tfvars"
+        run: terraform init -backend-config="prefix=${{ inputs.environment }}"
 
       # Download saved plan from artifacts  
       - name: Download Terraform Plan
