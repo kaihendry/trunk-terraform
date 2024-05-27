@@ -1,31 +1,20 @@
 name: 'Terraform Plan/Apply'
 
 on:
-  push:
-    branches:
-    - main
-  pull_request:
-    branches:
-    - main
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
 
-# set workloadidentityprovider env to 
-# workload_identity_provider: 'projects/944742483537/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
-# service_account: gh-559@huware-prep.iam.gserviceaccount.com
-env:
-  WORKLOAD: projects/270438815771/locations/global/workloadIdentityPools/gh-actions-pool/providers/gh-actions-provider
-  SVCACCOUNT: github-action@stgtest-424513.iam.gserviceaccount.com
-
-#Special permissions required for OIDC authentication
 permissions:
   id-token: write
   contents: read
   pull-requests: write
 
-# https://cloud.google.com/blog/products/identity-security/enabling-keyless-authentication-from-github-actions
 jobs:
     terraform-plan:
       name: 'Terraform Plan'
-      # Add "id-token" with the intended permissions.
       runs-on: ubuntu-latest
       outputs:
         tfplanExitCode: ${{ steps.tf-plan.outputs.exitcode }}
@@ -36,10 +25,9 @@ jobs:
 
       - id: 'auth'
         uses: 'google-github-actions/auth@v2'
-        # https://iam.googleapis.com/projects/944742483537/locations/global/workloadIdentityPools/my-pool/providers/my-provider
         with:
-          workload_identity_provider: ${{ env.WORKLOAD }}
-          service_account: ${{ env.SVCACCOUNT }}
+          workload_identity_provider: ${{ vars.WORKLOAD }}
+          service_account: ${{ vars.SVCACCOUNT }}
   
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'
@@ -67,7 +55,7 @@ jobs:
   
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend-config="dev/backend.tfvars"
   
       # Checks that all Terraform configuration files adhere to a canonical format
       # Will fail the build if not
