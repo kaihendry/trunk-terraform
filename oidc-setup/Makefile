@@ -1,4 +1,4 @@
-PROJECT_ID ?= devtest-1234
+PROJECT_ID ?= stgtest-1234 # terraform workspace new {dev,stg,prd}
 REPO ?= kaihendry/trunk-terraform
 
 env: init
