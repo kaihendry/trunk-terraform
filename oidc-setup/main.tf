@@ -8,7 +8,10 @@ terraform {
 
 variable "project_id" {
   type    = string
-  default = "stgtest-424513"
+}
+
+variable "repo" {
+  type    = string
 }
 
 provider "google" {
@@ -62,9 +65,9 @@ module "gh_oidc" {
   pool_id     = "gh-actions-pool"
   provider_id = "gh-actions-provider"
   sa_mapping = {
-    "kaihendry-bqtest-github-action" = {
+    "github-action" = {
       sa_name   = "projects/${var.project_id}/serviceAccounts/${google_service_account.github_action_sa.email}"
-      attribute = "attribute.repository/kaihendry/bq-terraform"
+      attribute = "attribute.repository/${var.repo}"
     }
   }
 }

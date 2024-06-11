@@ -18,3 +18,7 @@ You allow the service account write access to `hendry-bq-terraform` bucket to sa
     gs://hendry-bq-terraform/stg/:
     gs://hendry-bq-terraform/stg/default.tfstate
 
+# IAM permission troubleshooting
+
+    gcloud auth application-default revoke
+    gcloud auth application-default login
