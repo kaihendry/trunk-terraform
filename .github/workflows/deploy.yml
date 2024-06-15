@@ -31,21 +31,6 @@ jobs:
           service_account: ${{ vars.SVCACCOUNT }}
           workload_identity_provider: ${{ vars.WORKLOAD }}
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
-
-      - name: 'Use gcloud CLI'
-        run: 'gcloud info'
-
-      - name: Show enabled APIs
-        run: gcloud services list --enabled
-
-      - name: List installed components
-        run: gcloud components list
-
-      - name: Show project id
-        run: gcloud projects describe $(gcloud config get-value core/project) --format=value\(projectNumber\)
-
       # nicked from https://github.com/Azure-Samples/terraform-github-actions/blob/main/.github/workflows/tf-plan-apply.yml
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3

@@ -19,6 +19,11 @@ jobs:
         with:
             environment: dev
 
+    test-dev:
+        uses: ./.github/workflows/test.yml
+        with:
+            environment: dev
+
     deploy-to-stg:
         name: Deploy to stg
         needs:
@@ -30,3 +35,8 @@ jobs:
             pull-requests: write
         with:
             environment: stg
+
+    test-stg:
+        uses: ./.github/workflows/test.yml
+        with:
+            environment: dev
