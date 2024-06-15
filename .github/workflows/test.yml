@@ -1,9 +1,9 @@
 name: Test the environment
+
 on:
   workflow_call:
     inputs:
       environment:
-        description: The environment to run against
         type: string
         required: true
 

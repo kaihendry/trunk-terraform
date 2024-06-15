@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD done right
 
 on:
   push:
@@ -21,6 +21,10 @@ jobs:
 
     test-dev:
         uses: ./.github/workflows/test.yml
+        permissions:
+            id-token: write
+            contents: read
+            pull-requests: write
         with:
             environment: dev
 
@@ -38,5 +42,9 @@ jobs:
 
     test-stg:
         uses: ./.github/workflows/test.yml
+        permissions:
+            id-token: write
+            contents: read
+            pull-requests: write
         with:
             environment: dev
