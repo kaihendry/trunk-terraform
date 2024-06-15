@@ -22,3 +22,9 @@ You allow the service account write access to `hendry-bq-terraform` bucket to sa
 
     gcloud auth application-default revoke
     gcloud auth application-default login
+
+# Developing locally
+
+	terraform init -backend-config="prefix=dev" -reconfigure -upgrade
+
+Perhaps [Terraform workspaces](https://developer.hashicorp.com/terraform/cli/workspaces) can be considered instead of prefixes.
