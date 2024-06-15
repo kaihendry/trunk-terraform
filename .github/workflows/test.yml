@@ -30,4 +30,4 @@ jobs:
         uses: 'google-github-actions/setup-gcloud@v2'
 
       - name: Check bucket exists
-        run: gsutil ls gs://trunk-terraform-${{ inputs.environment }}
+        run: gsutil ls gs://foobar-terraform-${{ inputs.environment }}
