@@ -4,7 +4,7 @@ variable "stage" {
 }
 
 resource "google_storage_bucket" "static" {
-  name                        = "hendry-trunk-terraform-${var.stage}"
+  name                        = "trunk-terraform-${var.stage}"
   location                    = "EU"
   uniform_bucket_level_access = true
 }
