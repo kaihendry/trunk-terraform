@@ -27,7 +27,7 @@ jobs:
           workload_identity_provider: ${{ vars.WORKLOAD }}
 
       - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
+        uses: 'google-github-actions/setup-gcloud@v3'
 
       - name: Check bucket exists
         run: gsutil ls gs://trunk-terraform-${{ inputs.environment }}
