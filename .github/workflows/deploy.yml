@@ -65,7 +65,7 @@ jobs:
 
       # Save plan to artifacts
       - name: Publish Terraform Plan
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: tfplan-${{ inputs.environment }}
           path: tfplan-${{ inputs.environment }}
